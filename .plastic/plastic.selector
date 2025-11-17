@@ -1,0 +1,3 @@
+repository "iGame - Einknicken/iGame - Einknicken@9072309142383@cloud"
+  path "/"
+    smartbranch "/main/dev"
