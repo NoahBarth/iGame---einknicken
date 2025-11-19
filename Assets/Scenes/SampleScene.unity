@@ -204,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 15401049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.65, y: -3.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  facingDirection: 1
   rb: {fileID: 15401053}
   anim: {fileID: 15401055}
 --- !u!50 &15401053
@@ -10840,6 +10841,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 519420032}
   - {fileID: 15401051}
-  - {fileID: 519420032}
-  - {fileID: 619394802}
   - {fileID: 896820980}
