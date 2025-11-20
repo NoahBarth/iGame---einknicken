@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
     void Flip()
     {
         facingDirection *= -1;
