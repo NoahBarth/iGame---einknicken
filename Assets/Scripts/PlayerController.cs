@@ -34,4 +34,12 @@ public class PlayerController : MonoBehaviour
         facingDirection *= -1;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
+
+
+    // Event listener on TimeBar full
+    void Climb()
+    {
+        
+    }
+
 }

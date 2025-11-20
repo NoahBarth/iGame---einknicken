@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,5 +18,11 @@ public class PlayerEnergy : MonoBehaviour
     {
         energy -= Time.deltaTime;
         energyBar.fillAmount = Mathf.Clamp(energy / maxEnergy, 0, 1);
+
+        if(energy <= 0)
+        {
+            // Invoke Die Event to Player
+            Destroy(gameObject);
+        }
     }
 }
