@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public Animator anim;
 
+    public bool hasKey = false;
+
     // Update is called 50x per second
     void FixedUpdate()
     {
