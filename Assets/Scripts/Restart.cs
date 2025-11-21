@@ -9,7 +9,7 @@ public class Restart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!player && Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))
+        if (!player && Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
         {
             SceneManager.LoadScene(0);
         }
