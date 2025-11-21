@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class TimeIndicator : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class TimeIndicator : MonoBehaviour
     public float time;
     public float maxTime;
     public Image timeBar; 
+    public event Action EventclimbTrigger;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,19 +21,21 @@ public class TimeIndicator : MonoBehaviour
     {
         if (isColliding)
         {
-            time += Time.deltaTime*10;
+            time += Time.deltaTime*40;
             timeBar.fillAmount = Mathf.Clamp(time / maxTime, 0, 1);
 
             if(time >= maxTime)
             {
                 // Invoke Event to Player
                 Debug.Log("Full time");
+                EventclimbTrigger?.Invoke();
             }
         } 
         else
         {
             time = 0;
             timeBar.fillAmount = Mathf.Clamp(time / maxTime, 0, 1);
+            
         }
     }
 }

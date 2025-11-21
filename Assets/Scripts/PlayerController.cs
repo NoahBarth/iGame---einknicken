@@ -11,6 +11,23 @@ public class PlayerController : MonoBehaviour
 
     public bool hasKey = false;
 
+    public TimeIndicator timeIndicatorEventGenerator;
+
+    private ContactFilter2D ContactFilter;
+
+    public bool IsGrounded => rb.IsTouching(ContactFilter);
+    private Vector3 climbDirection;
+
+    void OnEnable()
+    {
+        timeIndicatorEventGenerator.EventclimbTrigger += Climb;
+    }
+
+    void OnDisable()
+    {
+        timeIndicatorEventGenerator.EventclimbTrigger -= Climb;
+    }
+
     // Update is called 50x per second
     void FixedUpdate()
     {
@@ -39,7 +56,12 @@ public class PlayerController : MonoBehaviour
     // Event listener on TimeBar full
     void Climb()
     {
-        
+            transform.Translate(climbDirection * Time.deltaTime * 3, Space.World);
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(IsGrounded) {climbDirection = Vector3.up;}
+        else {climbDirection = Vector3.down;}
+    }
 }
