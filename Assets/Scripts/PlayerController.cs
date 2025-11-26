@@ -1,4 +1,4 @@
-using UnityEditor.Tilemaps;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded => rb.IsTouching(ContactFilter);
     private Vector3 climbDirection;
+    public bool onLadder = false;
 
     void OnEnable()
     {
@@ -31,19 +32,27 @@ public class PlayerController : MonoBehaviour
     // Update is called 50x per second
     void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        // float verticalInput = Input.GetAxis("Vertical");
-
-        if(horizontalInput > 0 && transform.localScale.x < 0 ||
-        horizontalInput < 0 && transform.localScale.x > 0)
+        if (IsGrounded && onLadder)
         {
-            Flip();
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            onLadder = false;
         }
+        // Debug.Log("Is not on FLoor :"+IsGrounded);
+        if(!onLadder) {
+            if(IsGrounded) gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            float horizontalInput = Input.GetAxis("Horizontal");
+            // float verticalInput = Input.GetAxis("Vertical");
 
-        anim.SetFloat("horizontal", Mathf.Abs(horizontalInput));
+            if(horizontalInput > 0 && transform.localScale.x < 0 ||
+            horizontalInput < 0 && transform.localScale.x > 0)
+            {
+                Flip();
+            }
 
-        rb.linearVelocity = new Vector2(horizontalInput, 0) * speed;
-        
+            anim.SetFloat("horizontal", Mathf.Abs(horizontalInput));
+
+            rb.linearVelocity = new Vector2(horizontalInput, 0) * speed;
+        }
     }
 
     void Flip()
@@ -61,7 +70,16 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(IsGrounded) {climbDirection = Vector3.up;}
-        else {climbDirection = Vector3.down;}
+        if(collision.GetComponent<Ladder>())
+        {
+            if (collision.GetComponent<Ladder>().ladderToggle) 
+            {
+                climbDirection = Vector3.up;
+            }
+            else if (!collision.GetComponent<Ladder>().ladderToggle) 
+            {
+                climbDirection = Vector3.down;
+            }
+        }
     }
 }

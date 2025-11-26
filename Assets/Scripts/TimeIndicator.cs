@@ -9,6 +9,7 @@ public class TimeIndicator : MonoBehaviour
     public float maxTime;
     public Image timeBar; 
     public event Action EventclimbTrigger;
+    public Ladder activeLadder;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,21 +22,31 @@ public class TimeIndicator : MonoBehaviour
     {
         if (isColliding)
         {
-            time += Time.deltaTime*40;
+            time += Time.deltaTime*70;
             timeBar.fillAmount = Mathf.Clamp(time / maxTime, 0, 1);
 
             if(time >= maxTime)
             {
                 // Invoke Event to Player
                 Debug.Log("Full time");
+                gameObject.GetComponent<PlayerController>().onLadder = true;
                 EventclimbTrigger?.Invoke();
+                if(gameObject.GetComponent<PlayerController>().IsGrounded)
+                {
+                    activeLadder.ladderToggle = true;
+                } else activeLadder.ladderToggle = false;
+                
             }
         } 
         else
         {
             time = 0;
             timeBar.fillAmount = Mathf.Clamp(time / maxTime, 0, 1);
-            
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        activeLadder = collision.gameObject.GetComponent<Ladder>();
+    } 
 }

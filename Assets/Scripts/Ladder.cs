@@ -5,17 +5,7 @@ public class Ladder : MonoBehaviour
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public bool ladderToggle = true;
 
     // void OnCollisionEnter2D(Collision2D other)
     void OnTriggerEnter2D(Collider2D other)
@@ -31,5 +21,7 @@ public class Ladder : MonoBehaviour
     {
         Debug.Log("EXIT COLLISION");
         other.gameObject.GetComponent<TimeIndicator>().isColliding = false;
+         other.gameObject.GetComponent<PlayerController>().onLadder = false;
+         other.gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
     }
 }
