@@ -13,7 +13,7 @@ public class Bed : MonoBehaviour
         Debug.Log("collision with bed"); 
         if (other.gameObject.CompareTag("Player"))
         {
-            textField.text = "SUCCESS\nYou reached your bed. Sweet dreams\n Press <- + -> to restart";
+            textField.text = "SUCCESS\nYou reached your bed. Sweet dreams\nPress '->' to restart\nPress '<-' to quit";
             Destroy(other.gameObject);
             textField.enabled = true;
         } 

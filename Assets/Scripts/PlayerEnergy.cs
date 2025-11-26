@@ -26,7 +26,7 @@ public class PlayerEnergy : MonoBehaviour
         {
             // Invoke Die Event to Player
             Destroy(gameObject);
-            textField.text = "GAME OVER\nYou fell asleep. \nPress <- + -> to restart";
+            textField.text = "GAME OVER\nYou fell asleep. \nPress '->' to restart\nPress '<-' to quit";
             textField.enabled = true;
         }
     }
