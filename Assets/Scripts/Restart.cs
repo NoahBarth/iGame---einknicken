@@ -6,6 +6,7 @@ public class Restart : MonoBehaviour
 {
 
     public GameObject player;
+    private bool AllowInput = false;
 
     // Update is called once per frame
     void Update()
@@ -13,11 +14,12 @@ public class Restart : MonoBehaviour
         if (!player)
         {
             StartCoroutine(waitForFreshInput());
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) && AllowInput)
             {
                 SceneManager.LoadScene(0);
+
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow) && AllowInput)
             {
                 Application.Quit();
             }
@@ -26,6 +28,7 @@ public class Restart : MonoBehaviour
 
     private IEnumerator  waitForFreshInput()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+        AllowInput = true;
     }
 }
